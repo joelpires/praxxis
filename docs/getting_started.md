@@ -80,7 +80,7 @@ To open the notebook in vim, use the default command
 prax o <name or ordinal>
 ```
 ## Using Parameters
-Some notebooks have parameters that can be injected, allowing the notebook's functionality to be changed without editing the notebook itself. Praxxis supports parameter injection into any notebook with the first code cell tagged as a parameter cell. 
+Some notebooks have parameters that can be injected, allowing the notebook's functionality to be changed without editing the notebook itself. Praxxis supports parameter injection into any notebook with the first code cell tagged as a parameter cell.
 
 
 ### Notebook Parameters
@@ -120,13 +120,13 @@ To add a new parameter, set a parameter with the desired name and value:
 prax sp <name> <value>
 ```
 
-To try out injecting a parameter yourself, run these commands in the root of your praxxis folder. 
+To try out injecting a parameter yourself, run these commands in the root of your praxxis folder.
 ```
 prax al tests/test_notebooks
 prax l
 prax v test_param_inject
 prax p test_param_inject
-prax sp text_to_print 'hello test!'
+prax sp text_to_print "hello test!"
 prax r test_param_inject
 ```
 This sequence:
@@ -138,22 +138,22 @@ This sequence:
 - runs test_param_inject with this new injected parameter
 
 
-## Using Scenes 
+## Using Scenes
 Scenes allow you to create environments to keep your work in one place. Scenes save parameter configurations and execution history. You can indicate whether a problem has been resolved for now by ending and resuming scenes.
 
-To make a new scene, run 
+To make a new scene, run
 ```
 prax ns <name of new scene>
 ```
 To list scenes, run
 ```
-prax ls 
+prax ls
 ```
-Scenes can be marked as ended to signify that a workflow has finished. To end a scene, run 
+Scenes can be marked as ended to signify that a workflow has finished. To end a scene, run
 ```
 prax es <name or ordinal>
 ```
-Scenes can also be resumed with the command 
+Scenes can also be resumed with the command
 ```
 prax rs <name or ordinal>
 ```
