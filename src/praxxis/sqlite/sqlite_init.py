@@ -1,11 +1,11 @@
 """
-This file contains all init functions to be run at the first 
+This file contains all init functions to be run at the first
 instantiation of praxxis (or if something from the data is deleted
 unexpectedly)
 """
 
 
-def init_library_db(library_db):  
+def init_library_db(library_db):
     """initializes the library database"""
     from src.praxxis.sqlite import connection
 
@@ -85,18 +85,21 @@ def init_user_info(telemetry_db, send_telemetry=1):
     create_url = 'INSERT INTO "UserInfo" (Key, Value) VALUES ("URL", ?)'
     create_user = 'INSERT INTO "UserInfo" (Key) VALUES ("Username")'
     create_pswd = 'INSERT INTO "UserInfo" (Key) VALUES ("Password")'
+    create_custom_editor = 'INSERT INTO "UserInfo" (Key, Value) VALUES ("custom_editor", ?)'
     create_telemetry_table = 'CREATE TABLE "TelemBacklog" (LocalCopy TEXT PRIMARY KEY, SceneID TEXT, Error TEXT, ' \
                              'Operation INTEGER) '
     id_val = str(uuid.uuid4())
-    
+
     cur.execute(create_userinfo_table)
     cur.execute(create_user_id, (id_val,))
     cur.execute(create_telem_permissions, (send_telemetry,))
     url = "https://{0}:30443/gateway/default/webhdfs/v1/praxxis"
+    default_editor = "vim"
     cur.execute(create_host)
     cur.execute(create_url, (url,))
     cur.execute(create_user)
     cur.execute(create_pswd)
+    cur.execute(create_custom_editor, (default_editor,))
     cur.execute(create_telemetry_table)
     conn.commit()
     conn.close()

@@ -8,6 +8,7 @@ from src.praxxis.util.roots import _library_root
 from src.praxxis.util.roots import _library_db
 from src.praxxis.util.roots import _scene_root
 from src.praxxis.util.roots import _history_db
+from src.praxxis.util.roots import _model_db
 from src.praxxis.util.roots import _azure_data_studio_location
 from src.praxxis.util.roots import _query_start
 from src.praxxis.util.roots import _query_end
@@ -45,18 +46,26 @@ def run_notebook(arg,
 
 
 def open_notebook(arg,
+                  _user_info_db=_user_info_db,
                   scene_root=_scene_root,
                   history_db=_history_db,
                   library_db=_library_db,
+                  model_db=_model_db,
                   azure_data_studio_location=_azure_data_studio_location,
                   current_scene_db=None,
                   test=False):
     """handles opening a notebook"""
     from src.praxxis.notebook import open_notebook
     from src.praxxis.util import roots
+    from src.praxxis.sqlite import sqlite_user
 
-    # TODO: allow for selecting your own editor on first run
-    editor = "vim"
+    editor = custom_editor = sqlite_user.get_user_info(_user_info_db)[6][1]
+    current_editor = arg.viewer
+
+    if current_editor != custom_editor and current_editor != None:
+        sqlite_user.set_user_info(_user_info_db, "custom_editor", current_editor)
+        editor = current_editor
+        print("Default editor changed to " + editor + ".")
 
     if current_scene_db is None:
         current_scene_db = roots.get_current_scene_db(scene_root, history_db)

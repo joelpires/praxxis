@@ -3,7 +3,7 @@ This file opens a notebook in ADS, HTML, jupyter or vim
 """
 
 
-def open_notebook(args, current_scene_db, library_db, ads_location, editor="vim", test=False):
+def open_notebook(args, current_scene_db, library_db, ads_location, editor, test=False):
     """opens a notebook by getting the filename and then opening from the ads binary location"""
     import subprocess
     from src.praxxis.sqlite import sqlite_notebook
@@ -15,11 +15,11 @@ def open_notebook(args, current_scene_db, library_db, ads_location, editor="vim"
     notebook_data = notebook.get_notebook(current_scene_db, library_db, name)
 
     notebook_filename = notebook_data[0]
-    if args.viewer == "html":
+    if editor == "html":
         display_as_html(notebook_filename)
-    elif args.viewer == "jupyter":
+    elif editor == "jupyter":
         open_jupyter(notebook_filename, test)
-    elif args.viewer == "ads":
+    elif editor == "ads":
         try:
             subprocess.Popen([ads_location, notebook_filename])
         except Exception:

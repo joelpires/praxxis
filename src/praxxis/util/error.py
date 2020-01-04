@@ -2,6 +2,15 @@
 This file contains custom error definitions for praxxis operations.
 """
 
+class ModelNotFoundError(Exception):
+    """thrown when the user can't be found for an op"""
+
+    def __init__(self, name=None):
+        self.name = name
+
+    def __str__(self):
+        from src.praxxis.display import display_error
+        return str(display_error.user_not_found_error())
 
 class NotebookNotFoundError(Exception):
     """thrown when a notebook can't be found for an op"""

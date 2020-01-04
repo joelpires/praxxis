@@ -40,14 +40,14 @@ def get_current_scene_db(scene_root, history_db):
     return os.path.join(scene_root, scene, "%s.db" %(scene))
 
 def init(
-        root, 
-        library_root, 
-        library_db, 
-        output_root, 
-        scene_root, 
-        history_db, 
+        root,
+        library_root,
+        library_db,
+        output_root,
+        scene_root,
+        history_db,
         telemetry_db,
-        rulesengine_root, 
+        rulesengine_root,
         rulesengine_db,
         model_root,
         model_db,
@@ -69,7 +69,7 @@ def init(
     # library init
     if not os.path.exists(library_root):
         entry_library.init_library(library_root, library_db)
-    
+
     # output init
     if not os.path.exists(output_root):
         entry_notebook.init_output(output_root)
