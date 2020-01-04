@@ -67,6 +67,10 @@ def open_notebook(arg,
         editor = current_editor
         print("Default editor changed to " + editor + ".")
 
+    print(custom_editor)
+    print(current_editor)
+    print(editor)
+
     if current_scene_db is None:
         current_scene_db = roots.get_current_scene_db(scene_root, history_db)
 
