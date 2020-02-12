@@ -73,12 +73,26 @@ To open a notebook, praxxis offers a few options.
 prax o <name or ordinal> html
 prax o <name or ordinal> jupyter
 prax o <name or ordinal> ads
+prax o <name or ordinal> vim
 ```
-opens notebooks in HTML, Jupyter, or Azure Data Studio, respectively.
-To open the notebook in vim, use the default command
+opens notebooks in HTML, Jupyter, Azure Data Studio or vim, respectively.
+
+When praxxis is installed, the default editor is vim. Every time the notebook is open without specifying the editor, it is opened through the default editor:
 ```
 prax o <name or ordinal>
 ```
+
+It is possible to see the current default editor:
+```
+prax ve
+```
+
+To change the default editor you should type:
+```
+prax ce
+```
+This command lists the available choices of editors. You can then type the ordinal or the name of the editor to confirm the change.
+
 ## Using Parameters
 Some notebooks have parameters that can be injected, allowing the notebook's functionality to be changed without editing the notebook itself. Praxxis supports parameter injection into any notebook with the first code cell tagged as a parameter cell.
 

@@ -38,6 +38,7 @@ def command(argument,
     from src.praxxis.entrypoints import entry_telemetry
     from src.praxxis.entrypoints import entry_rulesengine
     from src.praxxis.entrypoints import entry_model
+    from src.praxxis.entrypoints import entry_editor
     from src.praxxis.util import roots
 
     if not test:
@@ -61,6 +62,8 @@ def command(argument,
         "open_notebook": entry_notebook.open_notebook,
         "search_notebooks": entry_notebook.search_notebook,
         "list_notebooks": entry_notebook.list_notebook,
+        "change_editor": entry_editor.change_editor,
+        "view_editor": entry_editor.view_editor,
         "history": entry_scene.history,
         "next_notebook": entry_notebook.next_notebook,
         "add_notebook": entry_notebook.add_notebook,

@@ -13,6 +13,8 @@ init(autoreset=True)
 run_notebook_command = "run_notebook"
 view_notebook_param_command = "view_notebook_param"
 list_notebooks_command = "list_notebooks"
+change_editor_command = "change_editor"
+view_editor_command = "view_editor"
 search_notebooks_command = "search_notebooks"
 open_notebook_command = "open_notebook"
 history_command = "history"
@@ -103,6 +105,11 @@ pull_notebook_param_name_help = "the name of the notebook to pull parameters fro
 pull_library_param_help = "pull parameters out of a library into your current scene"
 pull_library_param_name_help = "the name of the library to pull the parameters from"
 
+# editor help strings
+view_current_editor = "the name of the current default editor"
+list_current_editor = "list available editors, by ordinal."
+change_current_editor = "redefine the default editor"
+
 # library help strings
 add_library_help = "install library of notebooks to praxxis"
 add_library_path_help = "the path to the library you want to add"
@@ -142,16 +149,16 @@ import_model_converterpath_help = "the path to the converter"
 update_model_help = "fetch newest version of model from storage pool"
 
 praxxis_ascii_art = r"""
-                                                  /▒▒          
-                                                 |__/          
+                                                  /▒▒
+                                                 |__/
   /▒▒▒▒▒▒   /▒▒▒▒▒▒  /▒▒▒▒▒▒  /▒▒   /▒▒ /▒▒   /▒▒ /▒▒  /▒▒▒▒▒▒▒
  /▒▒__  ▒▒ /▒▒__  ▒▒|____  ▒▒|  ▒▒ /▒▒/|  ▒▒ /▒▒/| ▒▒ /▒▒_____/
-| ▒▒  \ ▒▒| ▒▒  \__/ /▒▒▒▒▒▒▒ \  ▒▒▒▒/  \  ▒▒▒▒/ | ▒▒|  ▒▒▒▒▒▒ 
+| ▒▒  \ ▒▒| ▒▒  \__/ /▒▒▒▒▒▒▒ \  ▒▒▒▒/  \  ▒▒▒▒/ | ▒▒|  ▒▒▒▒▒▒
 | ▒▒  | ▒▒| ▒▒      /▒▒__  ▒▒  >▒▒  ▒▒   >▒▒  ▒▒ | ▒▒ \____  ▒▒
 | ▒▒▒▒▒▒▒/| ▒▒     |  ▒▒▒▒▒▒▒ /▒▒/\  ▒▒ /▒▒/\  ▒▒| ▒▒ /▒▒▒▒▒▒▒/
-| ▒▒____/ |__/      \_______/|__/  \__/|__/  \__/|__/|_______/ 
-| ▒▒                                                           
-| ▒▒                                                           
+| ▒▒____/ |__/      \_______/|__/  \__/|__/  \__/|__/|_______/
+| ▒▒
+| ▒▒
 |__/
 """
 
@@ -189,7 +196,7 @@ def main(command_line=None):
     parser = argparse.ArgumentParser(description=praxxis_ascii_art,
                                      formatter_class=helpFormatter,
                                      usage="Notebooks: r, o, s, l, h, v, Scene: ns, es, cs, rs, ds, ls, Library: al, "
-                                           "rl, ll, sl, parameter:se , sv, de, le")
+                                           "rl, ll, sl, Parameter:se , sv, de, le, Editor:ve, ce")
 
     subparsers = parser.add_subparsers(dest='command')
 
@@ -214,6 +221,12 @@ def main(command_line=None):
 
     list_notebooks = subparsers.add_parser('list', aliases=["l"], help=list_notebooks_help)
     list_notebooks.set_defaults(which=list_notebooks_command)
+
+    view_editor = subparsers.add_parser('view', aliases=["ve"], help=view_current_editor)
+    view_editor.set_defaults(which=view_editor_command)
+
+    change_editor = subparsers.add_parser('list', aliases=["ce"], help=change_current_editor)
+    change_editor.set_defaults(which=change_editor_command)
 
     history = subparsers.add_parser('history', aliases=["h"], help=history_help)
     history.set_defaults(which=history_command)

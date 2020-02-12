@@ -59,13 +59,11 @@ def open_notebook(arg,
     from src.praxxis.util import roots
     from src.praxxis.sqlite import sqlite_user
 
-    editor = custom_editor = sqlite_user.get_user_info(_user_info_db)[6][1]
-    current_editor = arg.viewer
+    default_editor = sqlite_user.get_user_info(_user_info_db)[6][1]
+    editor = input_editor = arg.viewer
 
-    if current_editor != custom_editor and current_editor != None:
-        sqlite_user.set_user_info(_user_info_db, "custom_editor", current_editor)
-        editor = current_editor
-        print("Default editor changed to " + editor + ".")
+    if input_editor == None:
+        editor = default_editor
 
     if current_scene_db is None:
         current_scene_db = roots.get_current_scene_db(scene_root, history_db)
